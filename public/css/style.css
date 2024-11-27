@@ -1,0 +1,33 @@
+/* style.css */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif; /* Atur font untuk seluruh body */
+}
+
+.minvh {
+    min-height: 100vh;
+}
+
+/* Gaya untuk banner */
+.banner {
+    background-image: url("../img/static-img/beranda.png"); /* Ganti dengan path gambar Anda */
+    background-size: cover; /* Mengatur gambar agar menutupi seluruh area */
+    background-position: center; /* Mengatur posisi gambar ke tengah */
+    height: 100vh; /* Mengatur tinggi banner sesuai dengan tinggi viewport */
+    color: white; /* Mengatur warna teks di dalam banner */
+    display: flex; /* Mengatur banner menggunakan flexbox */
+    justify-content: center; /* Mengatur isi banner ke tengah secara horizontal */
+    align-items: center; /* Mengatur isi banner ke tengah secara vertikal */
+    text-align: center; /* Mengatur teks agar terpusat */
+}
+
+/* Gaya untuk pengumuman */
+.list-group-item {
+    margin-bottom: 10px; /* Menambahkan jarak antara item pengumuman */
+}
+
+/* Gaya untuk iframe Google Maps */
+iframe {
+    border: 0; /* Menghilangkan border pada iframe */
+    border-radius: 5px; /* Menambahkan sudut melingkar pada iframe */
+}
