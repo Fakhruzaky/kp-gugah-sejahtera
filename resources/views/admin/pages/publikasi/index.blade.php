@@ -25,7 +25,7 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $p->title }}</td>
                         <td>{{ $p->description }}</td>
-                        <td class="d-flex">
+                        <td class="column-gap-2 d-flex">
                             <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editPengumumanModal">Edit</button>
                             <form action="{{ route("hapus pengumuman", ['id' => $p->id]) }}" method="POST">
                                 @csrf
