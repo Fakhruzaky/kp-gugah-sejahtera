@@ -9,17 +9,17 @@ class AnnouncementController extends Controller
 {
     public function index()
     {
-        return view("guest.pages.publikasi.pengumuman.index", [
-            "announcements" => Announcement::all()
+        return view('guest.pages.publikasi.pengumuman.index', [
+            'announcements' => Announcement::all(),
         ]);
     }
 
     public function store(Request $request)
     {
         $data = $request->validate([
-            "title" => "required|string|max:255",
-            "content" => "required|string",
-            "image" => "nullable|image"
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'image' => 'nullable|image',
         ]);
 
         Announcement::create($data);
@@ -29,8 +29,8 @@ class AnnouncementController extends Controller
 
     public function show(Announcement $announcement)
     {
-        return view("guest.pages.publikasi.pengumuman.show", [
-            "announcement" => $announcement
+        return view('guest.pages.publikasi.pengumuman.show', [
+            'announcement' => $announcement,
         ]);
     }
 
