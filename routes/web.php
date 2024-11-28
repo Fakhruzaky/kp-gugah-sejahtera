@@ -1,22 +1,24 @@
 <?php
 
-use App\Http\Controllers\DataDesaController;
-use App\Http\Controllers\FasilitasController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\MisiController;
-use App\Http\Controllers\PengumumanController;
-use App\Http\Controllers\ProgramkerjaController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\VisiController;
+use App\Models\Gallery;
+use App\Models\Profile;
 use App\Models\DataDesa;
 use App\Models\Fasilitas;
-use App\Models\Pemerintahan;
 use App\Models\Pengumuman;
-use App\Models\Profile;
+use App\Models\Announcement;
+use App\Models\Pemerintahan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
-
-use function PHPSTORM_META\type;
+use App\Http\Controllers\MisiController;
+use App\Http\Controllers\VisiController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\DataDesaController;
+use App\Http\Controllers\FasilitasController;
+use App\Http\Controllers\PengumumanController;
+use App\Http\Controllers\AnnouncementController;
+use App\Http\Controllers\ProgramkerjaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,14 +79,6 @@ Route::middleware('guest')->group(function () {
     Route::get('/data-desa', function () {
         return view('guest.pages.data-desa.index');
     })->name('guest.data-desa');
-
-    Route::get('/publikasi/pengumuman', function () {
-        return view('guest.pages.publikasi.pengumuman.index');
-    })->name('guest.publikasi.pengumuman');
-
-    Route::get('/publikasi/galeri', function () {
-        return view('guest.pages.publikasi.galeri.index');
-    })->name('guest.publikasi.galeri');
 });
 
 Route::post('/logout', [LoginController::class, "logout"])->middleware('auth');
@@ -116,7 +110,8 @@ Route::get('admin/data-desa', function () {
 
 Route::get('admin/publikasi', function () {
     return view('admin.pages.publikasi.index', [
-        "pengumuman" => Pengumuman::all()
+        "announcements" => Announcement::all(),
+        "galleries" => Gallery::all()
     ]);
 })->name('admin.dashboard.publikasi')->middleware('auth');
 
@@ -187,6 +182,20 @@ Route::post('admin/savedata', [DataDesaController::class, "store"])->name("saved
 Route::put("/data/edit", [DataDesaController::class, "update"])->name("update data")->middleware('auth');
 Route::delete("/hapus-data/{id}", [DataDesaController::class, "destroy"])->name("hapus data")->middleware('auth');
 
-Route::post('admin/savepengumuman', [PengumumanController::class, "store"])->name("savepengumuman")->middleware('auth');
-Route::put("/pengumuman/edit", [PengumumanController::class, "update"])->name("update pengumuman")->middleware('auth');
-Route::delete("/hapus-pengumuman/{id}", [PengumumanController::class, "destroy"])->name("hapus pengumuman")->middleware('auth');
+Route::middleware("guest")->group(function () {
+    // * Pengumuman
+    Route::get("/publikasi/pengumuman", [AnnouncementController::class, "index"])->name("guest.publikasi.pengumuman");
+    Route::get("/pengumuman/{announcement}", [AnnouncementController::class, "show"])->name("lihat pengumuman");
+
+    // * Gallery
+    Route::get("/publikasi/galeri", [GalleryController::class, "index"])->name("guest.publikasi.galeri");
+});
+
+Route::middleware("auth")->group(function () {
+    // * Pengumuman
+    Route::post("/pengumuman", [AnnouncementController::class, "store"])->name("tambah pengumuman");
+    Route::delete("/pengumuman/{announcement}", [AnnouncementController::class, "destroy"])->name("hapus pengumuman");
+
+    // * Gallery
+    Route::post("/gallery", [GalleryController::class, "store"])->name("tambah gallery");
+});
