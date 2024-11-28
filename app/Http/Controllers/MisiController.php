@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Profile;
+use Illuminate\Http\Request;
 
 class MisiController extends Controller
 {
@@ -11,12 +11,12 @@ class MisiController extends Controller
     {
         $data = $request->validate([
             'title' => 'required|unique:profiles,title',
-            'description' => 'required'
+            'description' => 'required',
         ]);
 
         Profile::create([
             ...$data,
-            'type' => 'misi'
+            'type' => 'misi',
         ]);
 
         return back();
@@ -26,7 +26,7 @@ class MisiController extends Controller
     {
         $misi = Profile::query()->findOrFail($request->id);
 
-        $misi->update($request->except("id"));
+        $misi->update($request->except('id'));
 
         return back();
     }
