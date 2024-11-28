@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\DataDesa;
+use Illuminate\Http\Request;
 
 class DataDesaController extends Controller
 {
@@ -11,12 +11,12 @@ class DataDesaController extends Controller
     {
         $data = $request->validate([
             'title' => 'required|unique:profiles,title',
-            'description' => 'required'
+            'description' => 'required',
         ]);
 
         DataDesa::create([
             ...$data,
-            'type' => 'datadesa'
+            'type' => 'datadesa',
         ]);
 
         return back();
@@ -26,7 +26,7 @@ class DataDesaController extends Controller
     {
         $datadesa = DataDesa::query()->findOrFail($request->id);
 
-        $datadesa->update($request->except("id"));
+        $datadesa->update($request->except('id'));
 
         return back();
     }

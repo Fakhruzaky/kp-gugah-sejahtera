@@ -11,12 +11,12 @@ class ProgramkerjaController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|unique:pemerintahans,name',
-            'description' => 'required'
+            'description' => 'required',
         ]);
 
         Pemerintahan::create([
             ...$data,
-            'type' => 'program'
+            'type' => 'program',
         ]);
 
         return back();
@@ -26,7 +26,7 @@ class ProgramkerjaController extends Controller
     {
         $programkerja = Pemerintahan::query()->findOrFail($request->id);
 
-        $programkerja->update($request->except("id"));
+        $programkerja->update($request->except('id'));
 
         return back();
     }

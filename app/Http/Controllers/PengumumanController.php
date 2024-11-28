@@ -11,12 +11,12 @@ class PengumumanController extends Controller
     {
         $data = $request->validate([
             'title' => 'required|unique:pengumuman,title',
-            'description' => 'required'
+            'description' => 'required',
         ]);
 
         Pengumuman::create([
             ...$data,
-            'type' => 'pengumuman'
+            'type' => 'pengumuman',
         ]);
 
         return back();
@@ -26,7 +26,7 @@ class PengumumanController extends Controller
     {
         $pengumuman = Pengumuman::query()->findOrFail($request->id);
 
-        $pengumuman->update($request->except("id"));
+        $pengumuman->update($request->except('id'));
 
         return back();
     }

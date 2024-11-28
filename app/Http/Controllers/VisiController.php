@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Profile;
+use Illuminate\Http\Request;
 
 class VisiController extends Controller
 {
@@ -11,12 +11,12 @@ class VisiController extends Controller
     {
         $data = $request->validate([
             'title' => 'required|unique:profiles,title',
-            'description' => 'required'
+            'description' => 'required',
         ]);
 
         Profile::create([
             ...$data,
-            'type' => 'visi'
+            'type' => 'visi',
         ]);
 
         return back();
@@ -26,7 +26,7 @@ class VisiController extends Controller
     {
         $visi = Profile::query()->findOrFail($request->id);
 
-        $visi->update($request->except("id"));
+        $visi->update($request->except('id'));
 
         return back();
     }
