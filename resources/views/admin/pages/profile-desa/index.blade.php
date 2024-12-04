@@ -4,6 +4,41 @@
         <h1 class="h2">Dashboard | Profil Desa</h1>
     </div>
 
+    <!-- Sejarah Section -->
+    <h2>Sejarah</h2>
+    <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addSejarahModal">Tambah Sejarah</button>
+    <div class="table-responsive">
+        <table class="table table-striped table-sm">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Deskripsi</th>
+                    <th>Keterangan</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($sejarah as $s)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $s->title }}</td>
+                        <td>{{ $s->description }}</td>
+                        <td class="column-gap-2 d-flex">
+                            <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editSejarahModal">Edit</button>
+                            <form action="{{ route("hapus sejarah", ['id' => $s->id]) }}" method="POST">
+                                @csrf
+                                @method("DELETE")
+                                <button type="submit" onclick="return confirm('Apakah Anda yakin ingin menghapus?');" class="btn btn-danger btn-sm">Hapus</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+
+
+
     <!-- Visi Section -->
     <h2>Visi</h2>
     <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addVisionModal">Tambah Visi</button>
@@ -70,6 +105,7 @@
         </table>
     </div>
 
+
     <!-- Modal for Adding Vision -->
     <div class="modal fade" id="addVisionModal" tabindex="-1" aria-labelledby="addVisionModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -121,6 +157,62 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal for Sejarah -->
+@if ($sejarah->isEmpty())
+<!-- Adding Sejarah -->
+<div class="modal fade" id="addSejarahModal" tabindex="-1" aria-labelledby="addSejarahModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addSejarahModalLabel">Tambah Sejarah</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/admin/tambahsejarah" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="sejarahTitle" class="form-label">Deskripsi</label>
+                        <input type="text" class="form-control" id="sejarahTitle" name="title" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="sejarahDescription" class="form-label">Keterangan</label>
+                        <textarea class="form-control" id="sejarahDescription" name="description" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Tambah</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@else
+<!-- Editing Sejarah -->
+<div class="modal fade" id="editSejarahModal" tabindex="-1" aria-labelledby="editSejarahModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editSejarahModalLabel">Edit Sejarah</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/admin/editsejarah" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+                    <div class="mb-3">
+                        <label for="editSejarahName" class="form-label">Deskripsi</label>
+                        <input type="text" class="form-control" id="editSejarahName" name="name" value="Foto Sejarah" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="sejarahDescription" class="form-label">Keterangan</label>
+                        <textarea class="form-control" id="sejarahDescription" name="description" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
 
     <!-- Modal for Editing Vision -->
     <div class="modal fade" id="editVisionModal" tabindex="-1" aria-labelledby="editVisionModalLabel" aria-hidden="true">
@@ -234,7 +326,7 @@
                         @csrf
                         <div class="mb-3">
                             <label for="editFacilityName" class="form-label">Nama Fasilitas</label>
-                            <input type="text" class="form-control" id="editFacilityName" name="title" placeholder="puskesmas angker" required>
+                            <input type="text" class="form-control" id="editFacilityName" name="title"required>
                         </div>
                         <div class="mb-3">
                             <label for="editFacilityPhoto" class="form-label">Pilih Foto</label>

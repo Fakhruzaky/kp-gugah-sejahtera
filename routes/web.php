@@ -17,6 +17,7 @@ use App\Http\Controllers\DataDesaController;
 use App\Http\Controllers\FasilitasController;
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\ProgramkerjaController;
+use App\Http\Controllers\SejarahController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,7 +42,9 @@ Route::middleware('guest')->group(function () {
     })->name('beranda');
 
     Route::get('/profile/sejarah/', function () {
-        return view('guest.pages.profile.sejarah.index');
+        return view('guest.pages.profile.sejarah.index', [
+            'sejarah' => Profile::where('type', 'sejarah')->get(),
+        ]);
     })->name('guest.profile.sejarah');
 
     Route::get('/profile/visi-misi', function () {
@@ -83,6 +86,7 @@ Route::get('admin/beranda', function () {
 
 Route::get('admin/profile-desa', function () {
     return view('admin.pages.profile-desa.index', [
+        'sejarah' => Profile::where('type', 'sejarah')->get(),
         'visi' => Profile::where('type', 'visi')->get(),
         'misi' => Profile::where('type', 'misi')->get(),
         'fasilitas' => Fasilitas::all(),
@@ -108,6 +112,10 @@ Route::get('admin/publikasi', function () {
         'galleries' => Gallery::all(),
     ]);
 })->name('admin.dashboard.publikasi')->middleware('auth');
+
+Route::post('admin/tambahsejarah', [SejarahController::class, 'store'])->name('savesejarah')->middleware('auth');
+Route::put('/sejarah/edit', [SejarahController::class, 'update'])->name('update sejarah')->middleware('auth');
+Route::delete('/hapus-sejarah/{id}', [SejarahController::class, 'destroy'])->name('hapus sejarah')->middleware('auth');
 
 Route::post('admin/addvisi', [VisiController::class, 'store'])->name('savevisi')->middleware('auth');
 Route::put('/vision/edit', [VisiController::class, 'update'])->name('update visi')->middleware('auth');

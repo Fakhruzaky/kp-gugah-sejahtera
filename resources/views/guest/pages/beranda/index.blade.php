@@ -1,44 +1,19 @@
 @extends('guest.layouts.main')
-@section('container')
-    <!-- Banner -->
-    <div class="container-fluid banner d-flex align-items-center justify-content-center" style="height: 100vh;">
-        <div class="container text-center">
-            <h3 class="display-1">SELAMAT DATANG DI DESA GUGAH SEJAHTERA</h3>
-        </div>
-    </div>
 
+@section('container')
     <!-- Pengumuman Terbaru -->
     <!-- Konten Pengumuman -->
     <div class="container my-5">
         <h2 class="text-center mb-4">Pengumuman Terbaru</h2>
         <div class="row">
-            <div class="col-md-6">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title">Pengumuman Kegiatan Gotong Royong</h5>
-                        <p class="card-text">
-                            <small class="text-muted">January 25, 2024</small><br>
-                            Pengumuman untuk seluruh warga Desa Gugah Sejahtera, akan diadakan kegiatan gotong royong pada hari
-                            Minggu, 28 Januari 2024, pukul 07:00 WIB. Seluruh warga diharapkan dapat berpartisipasi...
-                        </p>
-                        <a href="detail_pengumuman.php?id=1" class="btn btn-link">Read More</a>
-                        <!-- Link ke halaman detail pengumuman -->
-                    </div>
+            <div class="card" style="width: 18rem;">
+                <img src="" class="card-img-top" alt="">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title">Pengumuman Pembagian BLT</h5>
-                        <p class="card-text">
-                            <small class="text-muted">January 20, 2024</small><br>
-                            Pembagian Bantuan Langsung Tunai (BLT) bagi warga yang memenuhi syarat akan dilakukan pada
-                            tanggal 30 Januari 2024 di Balai Desa Gugah Sejahtera. Pastikan membawa dokumen yang diperlukan...
-                        </p>
-                        <a href="detail_pengumuman.php?id=2" class="btn btn-link">Read More</a>
-                    </div>
-                </div>
-            </div>
+              </div>
         </div>
     </div>
 

@@ -67,11 +67,11 @@
     </div>
 
     <!-- Modal for Editing -->
-<div class="modal fade" id="editDataModal1" tabindex="-1" aria-labelledby="editDataModal1Label" aria-hidden="true">
+<div class="modal fade" id="editDataModal" tabindex="-1" aria-labelledby="editDataModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editDataModal1Label">Edit Data</h5>
+                <h5 class="modal-title" id="editDataModalLabel">Edit Data</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

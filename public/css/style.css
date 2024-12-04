@@ -1,7 +1,7 @@
 /* style.css */
 body {
     margin: 0;
-    font-family: Arial, sans-serif; /* Atur font untuk seluruh body */
+    font-family: "Poppins", sans-serif; /* Atur font untuk seluruh body */
 }
 
 .minvh {
@@ -30,4 +30,14 @@ body {
 iframe {
     border: 0; /* Menghilangkan border pada iframe */
     border-radius: 5px; /* Menambahkan sudut melingkar pada iframe */
+}
+
+.navbar-transparent {
+    background-color: transparent;
+    transition: background-color 0.3s ease;
+}
+
+.navbar-solid {
+    background-color: #286a59;
+    transition: background-color 0.3s ease;
 }

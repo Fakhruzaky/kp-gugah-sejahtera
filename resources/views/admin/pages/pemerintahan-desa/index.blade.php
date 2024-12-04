@@ -56,8 +56,12 @@
                 <td>{{ $pk->name }}</td>
                 <td>{{ $pk->description }}</td>
                 <td>
-                    <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editProgramModal1">Edit</button>
-                    <a href="{{ route('hapus program',['id'=>$pk->id]) }}" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus?');">Hapus</a>
+                    <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editProgramModal">Edit</button>
+                    <form action="{{ route('hapus program', ['id' => $pk->id]) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                    </form>
                 </td>
             </tr>
             @endforeach 
@@ -95,11 +99,11 @@
 
 <!-- Modal for Editing Organizational Structure -->
 @if ($struktur->isEmpty())
-<div class="modal fade" id="tambahstruktur" tabindex="-1" aria-labelledby="editOrganizationModal1Label" aria-hidden="true">
+<div class="modal fade" id="tambahstruktur" tabindex="-1" aria-labelledby="editOrganizationModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editOrganizationModal1Label">Edit Struktur Organisasi</h5>
+                <h5 class="modal-title" id="editOrganizationModalLabel">Edit Struktur Organisasi</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -120,11 +124,11 @@
     </div>
 </div>
 @else
-<div class="modal fade" id="editOrganizationModal1" tabindex="-1" aria-labelledby="editOrganizationModal1Label" aria-hidden="true">
+<div class="modal fade" id="editOrganizationModal" tabindex="-1" aria-labelledby="editOrganizationModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editOrganizationModal1Label">Edit Struktur Organisasi</h5>
+                <h5 class="modal-title" id="editOrganizationModalLabel">Edit Struktur Organisasi</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -148,12 +152,12 @@
 @endif
 
 
-<!-- Modal for Editing Program Kerja 1 -->
-<div class="modal fade" id="editProgramModal1" tabindex="-1" aria-labelledby="editProgramModal1Label" aria-hidden="true">
+<!-- Modal for Editing Program Kerja  -->
+<div class="modal fade" id="editProgramModal" tabindex="-1" aria-labelledby="editProgramModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editProgramModal1Label">Edit Program Kerja</h5>
+                <h5 class="modal-title" id="editProgramModalLabel">Edit Program Kerja</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

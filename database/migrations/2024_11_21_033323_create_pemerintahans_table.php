@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('pemerintahans', function (Blueprint $table) {
             $table->id();
             $table->string('type');
-            $table->string('description');
+            $table->text('description');
             $table->string('name');
             $table->string('image_url')->nullable();
             $table->timestamps();
