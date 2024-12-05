@@ -1,37 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Profile;
 
+use App\Http\Controllers\Controller;
 use App\Models\Fasilitas;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rules\File;
 
 class FasilitasController extends Controller
 {
-    public function store(Request $request)
+    public function index()
     {
-        $data = $request->validate([
-            'title' => 'required|unique:fasilitas,title',
-            'photo' => ['required', File::image()->max(2048)],
+        return view("admin.pages.profile-desa.fasilitas", [
+            "fasilitass" => Fasilitas::all()
         ]);
-
-        $path = $request->file('photo')->store('images/fasilitas');
-
-        Fasilitas::create([
-            ...$data,
-            'image_url' => $path,
-        ]);
-
-        return back();
-    }
-
-    public function update(Request $request)
-    {
-        $fasilitas = Fasilitas::query()->findOrFail($request->id);
-
-        $fasilitas->update($request->except('id'));
-
-        return back();
     }
 
     public function destroy(Fasilitas $id)
