@@ -13,8 +13,8 @@
         <div class="{{ Request::is('admin/profile-desa/*') ? 'show' : '' }} collapse" id="profile-desa" style="padding-left: 50px;" class="d-flex flex-column">
           <a href="{{ route('sejarah') }}" class="d-block text-decoration-none">Sejarah</a>
           <a href="{{ route('visi') }}" class="d-block text-decoration-none">Visi</a>
-          <a href="" class="d-block text-decoration-none">Misi</a>
-          <a href="" class="d-block text-decoration-none">Fasilitas</a>
+          <a href="{{ route('misi') }}" class="d-block text-decoration-none">Misi</a>
+          <a href="{{ route('fasilitas') }}" class="d-block text-decoration-none">Fasilitas</a>
         </div>
       </li>
       <li class="nav-item">

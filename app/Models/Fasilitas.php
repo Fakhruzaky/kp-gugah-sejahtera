@@ -9,5 +9,6 @@ class Fasilitas extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['id'];
+    protected $table = 'fasilitas';
+    protected $fillable = ['name', 'description', 'image'];
 }

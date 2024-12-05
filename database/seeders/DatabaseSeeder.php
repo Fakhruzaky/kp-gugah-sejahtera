@@ -13,5 +13,7 @@ class DatabaseSeeder extends Seeder
             'username' => 'gugahsejahtera',
             'password' => bcrypt('sukses123'),
         ]);
+
+        $this->call([SejarahSeeder::class]);
     }
 }
