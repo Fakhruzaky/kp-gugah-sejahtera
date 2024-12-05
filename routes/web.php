@@ -9,57 +9,39 @@ use App\Models\Pemerintahan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
-use App\Http\Controllers\MisiController;
-use App\Http\Controllers\VisiController;
+use App\Http\Controllers\Profile\MisiController;
+use App\Http\Controllers\Profile\VisiController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\DataDesaController;
-use App\Http\Controllers\FasilitasController;
+use App\Http\Controllers\Profile\FasilitasController;
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\ProgramkerjaController;
-use App\Http\Controllers\SejarahController;
+use App\Http\Controllers\Profile\SejarahController;
+use App\Models\Misi;
+use App\Models\Sejarah;
+use App\Models\Visi;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+Route::middleware("guest")->group(function () {
+    Route::get("/", fn() => view("guest.pages.beranda.index"))->name("beranda");
 
-Route::get('/login', function () {
-    return view('guest.pages.login.index');
-})->name('login');
-Route::middleware('guest')->group(function () {
+    Route::prefix("/profile")->group(function () {
+        Route::get("/sejarah", fn() => view("guest.pages.profile.sejarah.index", ["sejarah" => Sejarah::first()]))->name("guest.profile.sejarah");
+        Route::get("/visi-misi", fn() => view('guest.pages.profile.visi-misi.index', [
+            'visi' => Visi::all(),
+            'misi' => Misi::all()
+        ]))->name('guest.profile.visi-misi');
+        Route::get('/fasilitas', fn() => view("guest.pages.profile.fasilitas.index", [
+            'fasilitass' => Fasilitas::all()
+        ]))->name('guest.profile.fasilitas');
+    });
 
+    Route::get('/login', fn() => view('guest.pages.login.index'))->name('login');
     Route::post('/login', [LoginController::class, 'authenticate']);
+});
 
-    Route::get('/', function () {
-        return view('guest.pages.beranda.index');
-    })->name('beranda');
 
-    Route::get('/profile/sejarah/', function () {
-        return view('guest.pages.profile.sejarah.index', [
-            'sejarah' => Profile::where('type', 'sejarah')->get(),
-        ]);
-    })->name('guest.profile.sejarah');
-
-    Route::get('/profile/visi-misi', function () {
-        return view('guest.pages.profile.visi-misi.index', [
-            'visi' => Profile::where('type', 'visi')->get(),
-            'misi' => Profile::where('type', 'misi')->get(),
-        ]);
-    })->name('guest.profile.visi-misi');
-
-    Route::get('/profile/fasilitas', function () {
-        return view('guest.pages.profile.fasilitas.index', [
-            'fasilitas' => Fasilitas::all(),
-        ]);
-    })->name('guest.profile.fasilitas');
-
+Route::middleware('guest')->group(function () {
     Route::get('/pemerintahan-desa/struktur', function () {
         return view('guest.pages.profile.fasilitas.index');
     })->name('guest.profile.fasilitas');
@@ -93,6 +75,25 @@ Route::get('admin/profile-desa', function () {
     ]);
 })->name('admin.dashboard.profile-desa')->middleware('auth');
 
+Route::middleware("auth")->group(function () {
+    Route::prefix("/admin")->group(function () {
+        Route::prefix("/profile-desa")->group(function () {
+            Route::get("/sejarah", [SejarahController::class, "index"])->name("sejarah");
+            Route::post("/sejarah", [SejarahController::class, "store"])->name("store sejarah");
+            Route::put("/sejarah/{sejarah}", [SejarahController::class, "update"])->name("update sejarah");
+
+            Route::get("/visi", [VisiController::class, "index"])->name("visi");
+            Route::delete("/visi/{visi}", [VisiController::class, "destroy"])->name("hapus visi");
+
+            Route::get("/misi", [MisiController::class, "index"])->name("misi");
+            Route::delete("/misi/{misi}", [MisiController::class, "destroy"])->name("hapus misi");
+
+            Route::get("/fasilitas", [FasilitasController::class, "index"])->name("fasilitas");
+        });
+    });
+});
+
+
 Route::get('admin/pemerintahan-desa', function () {
     return view('admin.pages.pemerintahan-desa.index', [
         'struktur' => Pemerintahan::where('type', 'struktur')->get(),
@@ -113,17 +114,11 @@ Route::get('admin/publikasi', function () {
     ]);
 })->name('admin.dashboard.publikasi')->middleware('auth');
 
-Route::post('admin/tambahsejarah', [SejarahController::class, 'store'])->name('savesejarah')->middleware('auth');
-Route::put('/sejarah/edit', [SejarahController::class, 'update'])->name('update sejarah')->middleware('auth');
-Route::delete('/hapus-sejarah/{id}', [SejarahController::class, 'destroy'])->name('hapus sejarah')->middleware('auth');
-
 Route::post('admin/addvisi', [VisiController::class, 'store'])->name('savevisi')->middleware('auth');
 Route::put('/vision/edit', [VisiController::class, 'update'])->name('update visi')->middleware('auth');
-Route::delete('/hapus-visi/{id}', [VisiController::class, 'destroy'])->name('hapus visi')->middleware('auth');
 
 Route::post('admin/addmisi', [MisiController::class, 'store'])->name('savemisi')->middleware('auth');
 Route::put('/mission/edit', [MisiController::class, 'update'])->name('update misi')->middleware('auth');
-Route::delete('/hapus-misi/{id}', [MisiController::class, 'destroy'])->name('hapus misi')->middleware('auth');
 
 Route::post('admin/tambahstruktur', function (Request $request) {
     $path = $request->file('photo')->store('/images');
