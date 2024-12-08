@@ -1,22 +1,20 @@
 @extends('guest.layouts.main')
 @section('container')
-  <div class="container my-5">
-    <h2 class="mb-4 text-center">Pengumuman</h2>
-    <div class="row">
-      @foreach ($announcements as $announcement)
-        <div class="col-md-6">
-          <div class="card mb-4">
-            <div class="card-body">
-              <h5 class="card-title">{{ $announcement->title }}</h5>
-              <p class="card-text">
-                <small class="text-muted">{{ $announcement->created_at->translatedFormat('d F Y') }}</small><br>
-                {{ Str::limit($announcement->content, 200) }}
-              </p>
-              <a href="{{ route('lihat pengumuman', ['announcement' => $announcement->slug]) }}" class="btn btn-link">Read More</a>
-            </div>
-          </div>
+    <div class="container my-5">
+        <h2 class="mb-4 text-center">Pengumuman</h2>
+        <div class="row column-gap-3 row-gap-3 justify-content-center">
+            @foreach ($announcements as $a)
+                <div class="card col-3" style="width: 18rem;">
+                    <img src="{{ $a->image_url ? asset('storage/' . $a->image_url) : asset('img/static-img/lutpi.jpg') }}"
+                        class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $a->title }}</h5>
+                        <p class="card-text">{{ $a->created_at->translatedFormat('d F Y') }}</p>
+                        <p class="card-text">{{ Str::limit($a->content, 80) }}</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            @endforeach
         </div>
-      @endforeach
     </div>
-  </div>
 @endsection

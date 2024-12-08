@@ -23,7 +23,7 @@ use App\Models\Sejarah;
 use App\Models\Visi;
 
 Route::middleware("guest")->group(function () {
-    Route::get("/", fn() => view("guest.pages.beranda.index"))->name("beranda");
+    Route::get("/", fn() => view("guest.pages.beranda.index", ["announcements" => Announcement::latest()->take(3)->get()]))->name("beranda");
 
     Route::prefix("/profile")->group(function () {
         Route::get("/sejarah", fn() => view("guest.pages.profile.sejarah.index", ["sejarah" => Sejarah::first()]))->name("guest.profile.sejarah");
@@ -57,7 +57,9 @@ Route::middleware('guest')->group(function () {
     })->name('guest.pemerintahan-desa.program-kerja');
 
     Route::get('/data-desa', function () {
-        return view('guest.pages.data-desa.index');
+        return view('guest.pages.data-desa.index', [
+            'datadesa' => DataDesa::all()
+        ]);
     })->name('guest.data-desa');
 });
 
@@ -191,8 +193,11 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     // * Pengumuman
     Route::post('/pengumuman', [AnnouncementController::class, 'store'])->name('tambah pengumuman');
+    Route::put('/pengumuman', [AnnouncementController::class, 'update'])->name('edit pengumuman');
     Route::delete('/pengumuman/{announcement}', [AnnouncementController::class, 'destroy'])->name('hapus pengumuman');
 
     // * Gallery
     Route::post('/gallery', [GalleryController::class, 'store'])->name('tambah gallery');
+    Route::put('/gallery', [GalleryController::class, 'update'])->name('edit gallery');
+    Route::delete('/gallery/{gallery}', [GalleryController::class, 'destroy'])->name('hapus gallery');
 });
