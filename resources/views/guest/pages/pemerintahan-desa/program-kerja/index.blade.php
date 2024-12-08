@@ -1,7 +1,6 @@
 @extends('guest.layouts.main')
 @section('container')
     <div class="container my-5">
-        <h2 class="text-center mb-4">Program Kerja Desa Gugah Sejahtera</h2>
         <p>
             Dolor sit amet consectetur, adipisicing elit. Ipsam, beatae maxime.
             Vel animi eveniet doloremque reiciendis soluta iste provident non

@@ -41,3 +41,37 @@ iframe {
     background-color: #286a59;
     transition: background-color 0.3s ease;
 }
+
+/* floating button */
+#chatbotBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #25d366;
+    color: white;
+    font-size: 18px;
+    border-radius: 50%;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    transition: background-color 0.3s ease;
+  }
+  
+  #chatbotBtn:hover {
+    background-color: #128c7e; /* Darker green for hover effect */
+  }
+  
+  #chatbotBtn i {
+    font-size: 22px; /* Adjust the icon size */
+  }
+  
+  /* Optional: Add a smooth floating animation */
+  @keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+  }
+  
+  #chatbotBtn {
+    animation: float 2s ease-in-out infinite;
+  }

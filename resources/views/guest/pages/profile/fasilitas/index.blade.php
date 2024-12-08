@@ -1,7 +1,6 @@
 @extends('guest.layouts.main')
 @section('container')
   <div class="container my-5">
-    <h2 class="mb-4 text-center">Fasilitas Desa</h2>
     <div class="row">
       @foreach ($fasilitass as $fasilitas)
         <div class="col-md-4 mb-4">
