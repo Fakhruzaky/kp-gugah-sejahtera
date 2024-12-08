@@ -14,7 +14,7 @@
                         <h5 class="card-title">{{ $a->title }}</h5>
                         <p class="card-text">{{ $a->created_at->translatedFormat('d F Y') }}</p>
                         <p class="card-text">{{ Str::limit($a->content, 100) }}</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <a href="#" class="btn btn-primary">Selengkapnya</a>
                     </div>
                 </div>
             @endforeach

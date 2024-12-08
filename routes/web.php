@@ -53,7 +53,9 @@ Route::middleware('guest')->group(function () {
     })->name('guest.pemerintahan-desa.struktur');
 
     Route::get('/pemerintahan-desa/program-kerja', function () {
-        return view('guest.pages.pemerintahan-desa.program-kerja.index');
+        return view('guest.pages.pemerintahan-desa.program-kerja.index', [
+            'progjas' => Pemerintahan::where('type', 'program')->get()
+        ]);
     })->name('guest.pemerintahan-desa.program-kerja');
 
     Route::get('/data-desa', function () {
@@ -65,7 +67,7 @@ Route::middleware('guest')->group(function () {
 
 Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 Route::get('admin/beranda', function () {
-    return view('admin.pages.beranda.index');
+    return view('admin.pages.beranda.index',);
 })->name('admin.dashboard.beranda')->middleware('auth');
 
 Route::get('admin/profile-desa', function () {
@@ -150,7 +152,7 @@ Route::put('admin/editstruktur', function (Request $request) {
 Route::post('admin/addprogram', function (Request $request) {
     Pemerintahan::create([
         'type' => 'programkerja',
-        'name' => $request->title,
+        'title' => $request->title,
         'description' => $request->description,
     ]);
 

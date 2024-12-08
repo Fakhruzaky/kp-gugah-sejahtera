@@ -3,7 +3,7 @@
     <div class="container my-5">
         <h2 class="mb-4 fw-bold text-center">{{ $announcement->title }}</h2>
         <div class="row">
-            <img src="{{ asset('storage/' . $announcement->image_url) }}" style="height: 300px; margin-bottom: 20px;">
+            <img src="{{ asset('storage/' . $announcement->image_url) }}" style="height: 100%; margin-bottom: 20px;">
 
             <h5 class="fs-6">
                 <i class="fas fa-calendar-alt" style="font-size: 1rem;"></i>

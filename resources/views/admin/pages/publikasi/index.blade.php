@@ -66,14 +66,16 @@
                         </td>
                         <td>{{ $gallery->title }}</td>
                         <td>
-                            <button class="btn btn-warning btn-sm" data-bs-toggle="modal"
-                                data-bs-target="#editGalleryImageModal">Edit</button>
-                            <form action="{{ route('hapus gallery', ['gallery' => $gallery->id]) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" onclick="return confirm('Apakah Anda yakin ingin menghapus?');"
-                                    class="btn btn-danger btn-sm">Hapus</button>
-                            </form>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-warning btn-sm" data-bs-toggle="modal"
+                                    data-bs-target="#editGalleryImageModal">Edit</button>
+                                <form action="{{ route('hapus gallery', ['gallery' => $gallery->id]) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" onclick="return confirm('Apakah Anda yakin ingin menghapus?');"
+                                        class="btn btn-danger btn-sm">Hapus</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 @endforeach

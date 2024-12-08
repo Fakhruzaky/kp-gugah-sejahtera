@@ -25,7 +25,7 @@
                         <td>Foto Struktur Organisasi</td>
                         <td>
                             <button class="btn btn-warning btn-sm" data-bs-toggle="modal"
-                                data-bs-target="#editOrganizationModal1">Edit</button>
+                                data-bs-target="#editOrganizationModal">Edit</button>
                         </td>
                     </tr>
                     <!-- Add more entries as needed -->
@@ -57,13 +57,15 @@
                         <td>{{ $pk->name }}</td>
                         <td>{{ $pk->description }}</td>
                         <td>
-                            <button class="btn btn-warning btn-sm" data-bs-toggle="modal"
-                                data-bs-target="#editProgramModal">Edit</button>
-                            <form action="{{ route('hapus program', ['id' => $pk->id]) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                            </form>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-warning btn-sm" data-bs-toggle="modal"
+                                    data-bs-target="#editProgramModal">Edit</button>
+                                <form action="{{ route('hapus program', ['id' => $pk->id]) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 @endforeach
@@ -175,17 +177,17 @@
                         @method('PUT')
                         <select name="id">
                             @foreach ($programkerja as $pk)
-                                <option value="{{ $pk->id }}">{{ $pk->title }}</option>
+                                <option value="{{ $pk->id }}">{{ $pk->name }}</option>
                             @endforeach
                         </select>
                         <div class="mb-3">
                             <label for="editProgramDescription" class="form-label">Deskripsi</label>
-                            <input type="text" class="form-control" id="editProgramDescription" name="title"
+                            <input type="text" class="form-control" id="editProgramDescription" name="name"
                                 required>
                         </div>
                         <div class="mb-3">
                             <label for="editProgramRemarks" class="form-label">Keterangan</label>
-                            <textarea class="form-control" id="editProgramRemarks" name="content" rows="3" required></textarea>
+                            <textarea class="form-control" id="editProgramRemarks" name="description" rows="3" required></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Update</button>
                     </form>
