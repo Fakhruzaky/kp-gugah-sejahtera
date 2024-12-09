@@ -32,7 +32,7 @@ class AnnouncementController extends Controller
 
         Announcement::create([
             "title" => $data['title'],
-            'content' => $data['description'],
+            'description' => $data['description'],
             'image_url' => $path
         ]);
 

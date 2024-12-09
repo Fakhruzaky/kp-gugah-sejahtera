@@ -67,7 +67,9 @@ Route::middleware('guest')->group(function () {
 
 Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 Route::get('admin/beranda', function () {
-    return view('admin.pages.beranda.index',);
+    return view('admin.pages.beranda.index',[
+        'datadesa' => DataDesa::all()
+    ]);
 })->name('admin.dashboard.beranda')->middleware('auth');
 
 Route::get('admin/profile-desa', function () {

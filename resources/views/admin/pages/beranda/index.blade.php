@@ -6,39 +6,12 @@
 
     <!-- First row of three columns -->
     <div class="row mb-3">
-        <div class="col-md-4">
-            <div class="bg-white text-dark rounded border p-3">
-                <h5>Total Warga</h5>
-                <p>4056 Jiwa</p>
+        @foreach ($datadesa as $d)
+            <div class="col-md-4">
+                <div class="bg-white text-dark rounded border p-3">
+                    <h5>{{ $d->title }}</h5>
+                    <p>{{ $d->description }}</p>
+                </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="bg-white text-dark rounded border p-3">
-                <h5>Jumlah RT</h5>
-                <p>23 RT</p>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="bg-white text-dark rounded border p-3">
-                <h5>Jumlah RW</h5>
-                <p>6 RW</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Second row of three columns -->
-    <div class="row mb-3">
-        <div class="col-md-4">
-            <div class="bg-white text-dark rounded border p-3">
-                <h5>Jumlah KK</h5>
-                <p>1088 KK</p>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="bg-white text-dark rounded border p-3">
-                <h5>Jumlah Dusun</h5>
-                <p>3 Dusun (Gunung Gajah, Sejahtera, Pagong)</p>
-            </div>
-        </div>
-    </div>
-@endsection
+        @endforeach
+    @endsection

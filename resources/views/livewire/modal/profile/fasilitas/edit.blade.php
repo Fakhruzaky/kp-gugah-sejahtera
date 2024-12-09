@@ -9,7 +9,7 @@
         <form wire:submit="update">
           <div class="mb-3">
             <label for="visionTitle" class="form-label">Gambar Fasilitas</label>
-            <img wire:ignore.self src="{{ $image ? asset('storage/' . $image) : asset('img/static-img/lutpi.jpg') }}" alt="Preview" id="preview_edit" class="d-block" style="width: 100%">
+            <img wire:ignore.self src="{{ asset('storage/' . $image)  }}" alt="Preview" id="preview_edit" class="d-block" style="width: 100%">
             <input type="file" class="form-control mt-3" wire:model="photo" id="photo_edit" required>
           </div>
           <div class="mb-3">

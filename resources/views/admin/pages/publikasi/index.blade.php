@@ -24,7 +24,7 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $announcement->title }}</td>
-                        <td>{{ Str::limit($announcement->content, 70) }}</td>
+                        <td>{{ Str::limit($announcement->description, 70) }}</td>
                         <td class="d-flex column-gap-2">
                             <button class="btn btn-warning btn-sm" data-bs-toggle="modal"
                                 data-bs-target="#editAnnouncementModal">Edit</button>
