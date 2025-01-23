@@ -8,8 +8,7 @@
         <div class="row column-gap-3 justify-content-center">
             @foreach ($announcements as $a)
                 <div class="card col-3" style="width: 18rem;">
-                    <img src="{{ asset('storage/' . $a->image_url) }}"
-                        class="card-img-top" alt="">
+                    <img src="{{ asset('storage/' . $a->image_url) }}" class="card-img-top" alt="">
                     <div class="card-body">
                         <h5 class="card-title">{{ $a->title }}</h5>
                         <p class="card-text">{{ $a->created_at->translatedFormat('d F Y') }}</p>
@@ -26,7 +25,7 @@
     <div class="container my-5">
         <h2 class="text-center mb-4">Video Profil Desa</h2>
         <div class="d-flex justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-8 col-12">
                 <div class="ratio ratio-16x9">
                     <iframe width="560" height="315"
                         src="https://www.youtube.com/embed/_h60Hia1II0?si=F1rzRXCetth500jw" title="YouTube video player"
@@ -36,7 +35,7 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
     <!-- Google Maps Alamat Kantor Desa dan Kontak -->
     <div class="container my-5">

@@ -1,4 +1,9 @@
 /* style.css */
+html,
+body {
+    overflow-x: hidden;
+}
+
 body {
     margin: 0;
     font-family: "Poppins", sans-serif; /* Atur font untuk seluruh body */
@@ -55,23 +60,29 @@ iframe {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     z-index: 9999;
     transition: background-color 0.3s ease;
-  }
-  
-  #chatbotBtn:hover {
+}
+
+#chatbotBtn:hover {
     background-color: #128c7e; /* Darker green for hover effect */
-  }
-  
-  #chatbotBtn i {
+}
+
+#chatbotBtn i {
     font-size: 22px; /* Adjust the icon size */
-  }
-  
-  /* Optional: Add a smooth floating animation */
-  @keyframes float {
-    0% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-    100% { transform: translateY(0); }
-  }
-  
-  #chatbotBtn {
+}
+
+/* Optional: Add a smooth floating animation */
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+#chatbotBtn {
     animation: float 2s ease-in-out infinite;
-  }
+}

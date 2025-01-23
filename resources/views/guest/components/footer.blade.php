@@ -59,7 +59,7 @@
     </head>
 
     <body>
-        <div class="container footer">
+        <div class="container footer px-3">
             <div class="row">
                 <div class="col-md-4 text-start">
                     <h5 class="highlight">Kontak Kami:</h5>
