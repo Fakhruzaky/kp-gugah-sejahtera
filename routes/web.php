@@ -100,6 +100,9 @@ Route::middleware("auth")->group(function () {
             Route::delete("/misi/{misi}", [MisiController::class, "destroy"])->name("hapus misi");
 
             Route::get("/fasilitas", [FasilitasController::class, "index"])->name("fasilitas");
+            Route::post("/fasilitas/store", [FasilitasController::class, "store"])->name("fasilitas.store");
+            Route::put("/fasilitas/{fasilitas}/update", [FasilitasController::class, "update"])->name("fasilitas.update");
+            Route::delete('/fasilitas/{fasilitas}/delete', [FasilitasController::class, 'destroy'])->name('fasilitas.delete');
         });
     });
 });
@@ -178,8 +181,6 @@ Route::put('admin/editfasilitas', function (Request $request) {
 
     return back();
 })->middleware('auth');
-
-Route::delete('/hapus-fasilitas/{id}', [FasilitasController::class, 'destroy'])->name('hapus fasilitas')->middleware('auth');
 
 Route::post('admin/saveprogram', [ProgramkerjaController::class, 'store'])->name('saveprogram')->middleware('auth');
 Route::put('/program/edit', [ProgramkerjaController::class, 'update'])->name('update programkerja')->middleware('auth');
