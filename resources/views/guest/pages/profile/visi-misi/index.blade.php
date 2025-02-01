@@ -6,7 +6,7 @@
                 <div class="border p-4 rounded" style="background-color: #f8f9fa;">
                     <h3 class="text-center">Visi</h3>
                     @foreach ($visi as $v)
-                        <p>{{ $v->name }} : {{ $v->description }}</p>
+                        <p>{{ $v->name }} : {!! $v->description !!}</p>
                     @endforeach
                 </div>
             </div>
@@ -15,7 +15,7 @@
                 <div class="border p-4 rounded" style="background-color: #f8f9fa;">
                     <h3 class="text-center">Misi</h3>
                     @foreach ($misi as $m)
-                        <p>{{ $m->name }} : {{ $m->description }}</p>
+                        <p>{{ $m->name }} : {!! $m->description !!}</p>
                     @endforeach
                 </div>
             </div>

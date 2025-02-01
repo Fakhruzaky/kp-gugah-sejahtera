@@ -7,7 +7,7 @@
                     <div class="card mb-4">
                         <div class="card-body">
                             <h5 class="card-title">{{ $d->title }}</h5>
-                            <p class="card-text">{{ $d->description }}</p>
+                            <p class="card-text">{!! $d->description !!}</p>
                         </div>
                     </div>
                 </div>

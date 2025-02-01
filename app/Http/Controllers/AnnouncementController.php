@@ -17,6 +17,14 @@ class AnnouncementController extends Controller
         ]);
     }
 
+    public function show(Announcement $announcement)
+    {
+        return view('guest.pages.publikasi.pengumuman.show', [
+            'announcement' => $announcement,
+        ]);
+    }
+
+
     public function store(Request $request)
     {
         $data = $request->validate([

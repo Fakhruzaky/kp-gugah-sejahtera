@@ -13,7 +13,7 @@
                 <span style="font-size: 0.9rem;">Admin</span>
             </h5>
 
-            <p style="margin-top: 20px;">{{ $announcement->content }}</p>
+            <p style="margin-top: 20px;">{!! $announcement->description !!}</p>
         </div>
     </div>
 @endsection
