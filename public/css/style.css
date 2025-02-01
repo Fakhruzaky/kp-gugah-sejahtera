@@ -28,7 +28,8 @@ body {
 
 /* Gaya untuk pengumuman */
 .list-group-item {
-    margin-bottom: 10px; /* Menambahkan jarak antara item pengumuman */
+    margin-bottom: 10px;
+    /* Menambahkan jarak antara item pengumuman */
 }
 
 /* Gaya untuk iframe Google Maps */
