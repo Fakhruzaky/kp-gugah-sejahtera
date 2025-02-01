@@ -9,6 +9,17 @@ use Illuminate\Support\Facades\Storage;
 class ProgramkerjaController extends Controller
 {
 
+    public function index()
+    {
+        $struktur =  Pemerintahan::where('type', 'struktur')->get();
+        $programkerja = Pemerintahan::where('type', 'program')->get();
+
+        return view('admin.pages.pemerintahan-desa.index', [
+            'struktur' => $struktur,
+            'programkerja' => $programkerja,
+        ]);
+    }
+
     public function storeStruktur(Request $request)
     {
         $data = $request->validate([
@@ -70,29 +81,33 @@ class ProgramkerjaController extends Controller
     }
 
 
-
-    public function store(Request $request)
+    public function storeProgram(Request $request)
     {
+
         $data = $request->validate([
-            'name' => 'required',
-            'description' => 'required',
+            'name' => ['required', 'max:255'],
+            'description' => ['required', 'max:255'],
         ]);
 
-        Pemerintahan::create([
-            ...$data,
-            'type' => 'program',
-        ]);
+        $data['type'] = 'program';
 
-        return back();
+        Pemerintahan::create($data);
+
+        return back()->with('success', 'Data Program Kerja Berhasil Ditambah!');
     }
 
-    public function update(Request $request)
+    public function updateProgram(Request $request, Pemerintahan $program)
     {
-        $programkerja = Pemerintahan::query()->findOrFail($request->id);
+        $data = $request->validate([
+            'name' => ['required', 'max:255'],
+            'description' => ['required', 'max:255'],  // Validate description length
+        ]);
 
-        $programkerja->update($request->except('id'));
+        // Update the record with the validated data, including the image field
+        $program->update($data);
 
-        return back();
+        // Redirect back with a success message
+        return back()->with('success', 'Data Program Berhasil Diubah!');
     }
 
     public function destroy(Pemerintahan $id)

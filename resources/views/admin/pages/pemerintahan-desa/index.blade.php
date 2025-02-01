@@ -161,16 +161,48 @@
 
     <!-- Program Kerja Section -->
     <h2 class="mt-5">Program Kerja</h2>
-    <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addProgramModal">Tambah Program
-        Kerja</button>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Tambah Program Kerja Desa
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Fasilitas Desa</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ route('program.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nama</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="addProgramDescription" class="form-label">Keterangan</label>
+                            <input id="addProgramDescription" type="hidden" name="description" required>
+                            <trix-editor input="addProgramDescription"></trix-editor>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Tambah</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <div class="table-responsive">
         <table class="table table-striped table-sm">
             <thead>
                 <tr>
                     <th>No</th>
+                    <th>Program Kerja</th>
                     <th>Deskripsi</th>
-                    <th>Keterangan</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -179,11 +211,55 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $pk->name }}</td>
-                        <td>{{ $pk->description }}</td>
+                        <td>{!! $pk->description !!}</td>
                         <td>
                             <div class="d-flex gap-2">
-                                <button class="btn btn-warning btn-sm" data-bs-toggle="modal"
-                                    data-bs-target="#editProgramModal">Edit</button>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal"
+                                    data-bs-target="#ProgramData{{ $pk->id }}">
+                                    Edit
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="ProgramData{{ $pk->id }}" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Struktur :
+                                                    {{ $pk->name }}</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <form action="{{ route('program.update', ['program' => $pk->id]) }}"
+                                                method="POST" enctype="multipart/form-data">
+                                                @csrf
+                                                @method('PUT')
+                                                <div class="modal-body">
+                                                    <div class="mb-3">
+                                                        <label for="name" class="form-label">Nama</label>
+                                                        <input type="text" class="form-control" id="name"
+                                                            name="name" value="{{ $pk->name }}" required>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="editProgramDesc-{{ $pk->id }}"
+                                                            class="form-label">Keterangan</label>
+                                                        <input id="editProgramDesc-{{ $pk->id }}" type="hidden"
+                                                            name="description" required value="{{ $pk->description }}">
+                                                        <trix-editor input="editProgramDesc-{{ $pk->id }}">
+                                                        </trix-editor>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Batal</button>
+                                                    <button type="submit" class="btn btn-primary">Ubah</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <form action="{{ route('hapus program', ['id' => $pk->id]) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
@@ -197,33 +273,6 @@
                 <!-- Add more entries as needed -->
             </tbody>
         </table>
-    </div>
-
-    <!-- Modal for Adding Program Kerja -->
-    <div class="modal fade" id="addProgramModal" tabindex="-1" aria-labelledby="addProgramModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addProgramModalLabel">Tambah Program Kerja</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="{{ route('saveprogram') }}" method="POST">
-                        @csrf
-                        <div class="mb-3">
-                            <label for="programTitle" class="form-label">Deskripsi</label>
-                            <input type="text" class="form-control" id="programTitle" name="name" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="programDescription" class="form-label">Keterangan</label>
-                            <textarea class="form-control" id="programDescription" name="description" rows="3" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                    </form>
-                </div>
-            </div>
-        </div>
     </div>
     <script>
         var loadFile = function(event, id = null) {

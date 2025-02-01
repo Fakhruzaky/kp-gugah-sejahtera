@@ -107,14 +107,6 @@ Route::middleware("auth")->group(function () {
     });
 });
 
-
-Route::get('admin/pemerintahan-desa', function () {
-    return view('admin.pages.pemerintahan-desa.index', [
-        'struktur' => Pemerintahan::where('type', 'struktur')->get(),
-        'programkerja' => Pemerintahan::where('type', 'program')->get(),
-    ]);
-})->name('admin.dashboard.pemerintahan-desa')->middleware('auth');
-
 Route::get('admin/data-desa', function () {
     return view('admin.pages.data-desa.index', [
         'datadesa' => DataDesa::all(),
@@ -133,21 +125,12 @@ Route::get('admin/publikasi', function () {
 Route::post('admin/addmisi', [MisiController::class, 'store'])->name('savemisi')->middleware('auth');
 Route::put('/mission/edit', [MisiController::class, 'update'])->name('update misi')->middleware('auth');
 
+
+Route::get('admin/pemerintahan-desa', [ProgramkerjaController::class, 'index'])->name('admin.dashboard.pemerintahan-desa')->middleware('auth');
 Route::post('admin/tambahstruktur', [ProgramkerjaController::class, 'storeStruktur'])->name('struktur.store')->middleware('auth');
 Route::put("admin/pemerintahan/{pemerintahan}/update", [ProgramkerjaController::class, "updateStruktur"])->name("struktur.update")->middleware('auth');
 Route::delete('/pemerintahan/{pemerintahan}/delete', [ProgramkerjaController::class, 'destroyStruktur'])->name('struktur.delete');
 
-
-
-Route::post('admin/addprogram', function (Request $request) {
-    Pemerintahan::create([
-        'type' => 'programkerja',
-        'title' => $request->title,
-        'description' => $request->description,
-    ]);
-
-    return back();
-})->middleware('auth');
 
 Route::post('admin/tambahfasilitas', [FasilitasController::class, 'store'])->name('savefasilitas');
 
@@ -163,8 +146,8 @@ Route::put('admin/editfasilitas', function (Request $request) {
     return back();
 })->middleware('auth');
 
-Route::post('admin/saveprogram', [ProgramkerjaController::class, 'store'])->name('saveprogram')->middleware('auth');
-Route::put('/program/edit', [ProgramkerjaController::class, 'update'])->name('update programkerja')->middleware('auth');
+Route::post('admin/saveprogram', [ProgramkerjaController::class, 'storeProgram'])->name('program.store')->middleware('auth');
+Route::put("/program/{program}/update", [ProgramkerjaController::class, "updateProgram"])->name("program.update");
 Route::delete('/hapus-program/{id}', [ProgramkerjaController::class, 'destroy'])->name('hapus program')->middleware('auth');
 
 Route::post('admin/savedata', [DataDesaController::class, 'store'])->name('savedata')->middleware('auth');
