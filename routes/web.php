@@ -67,7 +67,7 @@ Route::middleware('guest')->group(function () {
 
 Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 Route::get('admin/beranda', function () {
-    return view('admin.pages.beranda.index',[
+    return view('admin.pages.beranda.index', [
         'datadesa' => DataDesa::all()
     ]);
 })->name('admin.dashboard.beranda')->middleware('auth');
@@ -89,7 +89,10 @@ Route::middleware("auth")->group(function () {
             Route::put("/sejarah/{sejarah}", [SejarahController::class, "update"])->name("update sejarah");
 
             Route::get("/visi", [VisiController::class, "index"])->name("visi");
+            Route::post("/visi/store", [VisiController::class, "store"])->name("visi.store");
+            Route::put("/visi/{visi}/update", [VisiController::class, "update"])->name("visi.update");
             Route::delete("/visi/{visi}", [VisiController::class, "destroy"])->name("hapus visi");
+
 
             Route::get("/misi", [MisiController::class, "index"])->name("misi");
             Route::delete("/misi/{misi}", [MisiController::class, "destroy"])->name("hapus misi");
@@ -120,8 +123,7 @@ Route::get('admin/publikasi', function () {
     ]);
 })->name('admin.dashboard.publikasi')->middleware('auth');
 
-Route::post('admin/addvisi', [VisiController::class, 'store'])->name('savevisi')->middleware('auth');
-Route::put('/vision/edit', [VisiController::class, 'update'])->name('update visi')->middleware('auth');
+
 
 Route::post('admin/addmisi', [MisiController::class, 'store'])->name('savemisi')->middleware('auth');
 Route::put('/mission/edit', [MisiController::class, 'update'])->name('update misi')->middleware('auth');
