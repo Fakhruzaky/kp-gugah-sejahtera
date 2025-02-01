@@ -166,7 +166,7 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     // * Pengumuman
     Route::post('/pengumuman', [AnnouncementController::class, 'store'])->name('tambah pengumuman');
-    Route::put('/pengumuman', [AnnouncementController::class, 'update'])->name('edit pengumuman');
+    Route::put('/pengumuman/{pengumuman:id}/update', [AnnouncementController::class, 'update'])->name('pengumuman.update');
     Route::delete('/pengumuman/{announcement}', [AnnouncementController::class, 'destroy'])->name('hapus pengumuman');
 
     // * Gallery

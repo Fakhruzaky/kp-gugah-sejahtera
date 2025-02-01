@@ -10,7 +10,7 @@
             <div class="col-md-4">
                 <div class="bg-white text-dark rounded border p-3">
                     <h5>{{ $d->title }}</h5>
-                    <p>{{ $d->description }}</p>
+                    <p>{!! $d->description !!}</p>
                 </div>
             </div>
         @endforeach
