@@ -170,7 +170,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/pengumuman/{announcement}', [AnnouncementController::class, 'destroy'])->name('hapus pengumuman');
 
     // * Gallery
-    Route::post('/gallery', [GalleryController::class, 'store'])->name('tambah gallery');
-    Route::put('/gallery', [GalleryController::class, 'update'])->name('edit gallery');
-    Route::delete('/gallery/{gallery}', [GalleryController::class, 'destroy'])->name('hapus gallery');
+    Route::post('/gallery', [GalleryController::class, 'store'])->name('gallery.store');
+    Route::put('/gallery/{galeri}/update', [GalleryController::class, 'update'])->name('gallery.update');
+    Route::delete('/gallery/{galeri}/delete', [GalleryController::class, 'destroy'])->name('gallery.delete');
 });

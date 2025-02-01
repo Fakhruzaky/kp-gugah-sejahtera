@@ -155,35 +155,38 @@
 
     <!-- Gallery Section -->
     <h3>Galeri</h3>
-    <!-- Button to trigger add gallery image modal -->
-    <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addGalleryImageModal">Tambah
-        Foto</button>
-    <!-- Modal for Adding Gallery Image -->
-    <div class="modal fade" id="addGalleryImageModal" tabindex="-1" aria-labelledby="addGalleryImageModalLabel"
+    <!-- Button to trigger add gallery modal -->
+    <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addGalleryModal">Tambah
+        Galeri</button>
+    <!-- Modal for Adding gallery -->
+    <div class="modal fade" id="addGalleryModal" tabindex="-1" aria-labelledby="addGalleryModallLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addGalleryImageModalLabel">Tambah Foto Galeri</h5>
+                    <h5 class="modal-title" id="addAnnouncementModalLabel">Tambah Pengumuman</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('tambah gallery') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('gallery.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
-                            <label for="galleryImage" class="form-label">Pilih Foto</label>
-                            <input type="file" class="form-control" id="galleryImageAdd" name="image" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="galleryDescription" class="form-label">Judul Foto</label>
-                            <input type="text" class="form-control" id="galleryDescription" name="title"
+                            <label for="title" class="form-label">Judul</label>
+                            <input type="text" class="form-control" id="title" name="title"
                                 placeholder="Caption" required>
                         </div>
                         <div class="mb-3">
-                            <label for="AnnouncementDescription" class="form-label">Deskripsi Pengumuman</label>
-                            <textarea class="form-control" id="AnnouncementDescription" name="description" rows="3" required></textarea>
+                            <label for="addGalleryDesc" class="form-label">Keterangan</label>
+                            <input id="addGalleryDesc" type="hidden" name="description" required>
+                            <trix-editor input="addGalleryDesc">
+                            </trix-editor>
                         </div>
-                        <img id="preview_add" width="100%" height="300" class="mb-3" />
+                        <div class="mb-3">
+                            <label for="image_url" class="form-label">Pilih Foto</label>
+                            <input type="file" class="form-control" id="image_urlAdd" name="image_url" required
+                                onchange="loadFile(event)">
+                        </div>
+                        <img id="preview" class="img-fluid w-100 my-3">
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </form>
                 </div>
@@ -195,8 +198,9 @@
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>Gambar</th>
                     <th>Judul Gambar</th>
+                    <th>Deskripsi</th>
+                    <th>Gambar</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -204,16 +208,61 @@
                 @foreach ($galleries as $gallery)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
+                        <td>{{ $gallery->title }}</td>
+                        <td>{!! $gallery->description !!}</td>
                         <td>
                             <img src="{{ asset('storage/' . $gallery->image_url) }}" alt="{{ $gallery->title }}"
                                 width="400" height="200">
                         </td>
-                        <td>{{ $gallery->title }}</td>
                         <td>
                             <div class="d-flex gap-2">
-                                <button class="btn btn-warning btn-sm" data-bs-toggle="modal"
-                                    data-bs-target="#editGalleryImageModal">Edit</button>
-                                <form action="{{ route('hapus gallery', ['gallery' => $gallery->id]) }}" method="POST">
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal"
+                                    data-bs-target="#ProgramData{{ $gallery->id }}">
+                                    Edit
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="ProgramData{{ $gallery->id }}" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Struktur :
+                                                    {{ $gallery->name }}</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <form action="{{ route('gallery.update', ['galeri' => $gallery->id]) }}"
+                                                method="POST" enctype="multipart/form-data">
+                                                @csrf
+                                                @method('PUT')
+                                                <div class="modal-body">
+                                                    <div class="mb-3">
+                                                        <label for="name" class="form-label">Nama</label>
+                                                        <input type="text" class="form-control" id="name"
+                                                            name="title" value="{{ $gallery->title }}" required>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="editGalleryDesc-{{ $gallery->id }}"
+                                                            class="form-label">Keterangan</label>
+                                                        <input id="editGalleryDesc-{{ $gallery->id }}" type="hidden"
+                                                            name="description" required
+                                                            value="{{ $gallery->description }}">
+                                                        <trix-editor input="editGalleryDesc-{{ $gallery->id }}">
+                                                        </trix-editor>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Batal</button>
+                                                    <button type="submit" class="btn btn-primary">Ubah</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <form action="{{ route('gallery.delete', ['galeri' => $gallery->id]) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" onclick="return confirm('Apakah Anda yakin ingin menghapus?');"
