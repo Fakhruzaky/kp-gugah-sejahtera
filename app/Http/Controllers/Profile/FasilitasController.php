@@ -38,24 +38,27 @@ class FasilitasController extends Controller
     {
         $data = $request->validate([
             'name' => ['required', 'max:255'],
-            'description' => ['required', 'max:255'],
-            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'], // Image validation
+            'description' => ['required', 'max:255'],  // Validate description length
+            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'], // Image validation (nullable)
         ]);
 
-        // Handle image upload
         if ($request->hasFile('image')) {
-            // Delete the old image if it exists
             if ($fasilitas->image) {
                 Storage::disk('public')->delete($fasilitas->image);
             }
 
             $data['image'] = $request->file('image')->store('fasilitas', 'public');
+        } else {
+            $data['image'] = $fasilitas->image;
         }
 
+        // Update the record with the validated data, including the image field
         $fasilitas->update($data);
 
+        // Redirect back with a success message
         return back()->with('success', 'Data Fasilitas Berhasil Diubah!');
     }
+
 
     public function destroy(Fasilitas $fasilitas)
     {

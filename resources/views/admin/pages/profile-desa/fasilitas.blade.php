@@ -90,7 +90,7 @@
                                                 aria-label="Close"></button>
                                         </div>
                                         <form action="{{ route('fasilitas.update', ['fasilitas' => $fasilitas->id]) }}"
-                                            method="POST">
+                                            method="POST" enctype="multipart/form-data">
                                             @csrf
                                             @method('PUT')
                                             <div class="modal-body">
@@ -111,8 +111,9 @@
                                                     <label for="oldImage" class="form-label">Gambar Lama</label>
                                                     @if ($fasilitas->image)
                                                         <div class="text-center">
-                                                            <img src="{{ asset('storage/' . $fasilitas->image) }}"
-                                                                alt="Fasilitas Image" class="img-fluid w-100">
+                                                            <img id="preview-{{ $fasilitas->id }}"
+                                                                class="img-fluid w-100 my-3"
+                                                                src="{{ $fasilitas->image ? asset('storage/' . $fasilitas->image) : '' }}">
                                                         </div>
                                                     @else
                                                         tidak ada gambar

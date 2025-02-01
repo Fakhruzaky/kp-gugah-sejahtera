@@ -133,30 +133,11 @@ Route::get('admin/publikasi', function () {
 Route::post('admin/addmisi', [MisiController::class, 'store'])->name('savemisi')->middleware('auth');
 Route::put('/mission/edit', [MisiController::class, 'update'])->name('update misi')->middleware('auth');
 
-Route::post('admin/tambahstruktur', function (Request $request) {
-    $path = $request->file('photo')->store('/images');
+Route::post('admin/tambahstruktur', [ProgramkerjaController::class, 'storeStruktur'])->name('struktur.store')->middleware('auth');
+Route::put("admin/pemerintahan/{pemerintahan}/update", [ProgramkerjaController::class, "updateStruktur"])->name("struktur.update")->middleware('auth');
+Route::delete('/pemerintahan/{pemerintahan}/delete', [ProgramkerjaController::class, 'destroyStruktur'])->name('struktur.delete');
 
-    Pemerintahan::create([
-        'type' => 'struktur',
-        'description' => 'strukturpemerintahan',
-        'name' => 'fotostruktur',
-        'image_url' => $path,
-    ]);
 
-    return back();
-})->middleware('auth');
-
-Route::put('admin/editstruktur', function (Request $request) {
-    $struktur = Pemerintahan::where('type', 'struktur')->first();
-    Storage::delete($struktur->image_url);
-
-    $path = $request->file('photo')->store('images');
-    $struktur->update([
-        'image_url' => $path,
-    ]);
-
-    return back();
-})->middleware('auth');
 
 Route::post('admin/addprogram', function (Request $request) {
     Pemerintahan::create([
