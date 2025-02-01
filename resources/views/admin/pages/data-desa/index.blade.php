@@ -21,10 +21,45 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $d->title }}</td>
-                        <td>{{ $d->description }}</td>
+                        <td>{!! $d->description !!}</td>
                         <td class="column-gap-2 d-flex">
                             <button class="btn btn-warning btn-sm" data-bs-toggle="modal"
-                                data-bs-target="#editDataModal">Edit</button>
+                                data-bs-target="#editDataModal-{{ $d->id }}">Edit</button>
+                            <!-- Modal for Editing -->
+                            <div class="modal fade" id="editDataModal-{{ $d->id }}" tabindex="-1"
+                                aria-labelledby="editDataModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="editDataModalLabel">Edit Data ID :
+                                                {{ $d->id }}</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="{{ route('update data', ['dataDesa' => $d->id]) }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <div class="mb-3">
+                                                    <label for="editDataDescription" class="form-label">Deskripsi</label>
+                                                    <input type="text" class="form-control" id="editDataDescription"
+                                                        name="title" value="{{ $d->title }}" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="editDataDescription-{{ $d->description }}"
+                                                        class="form-label">Keterangan</label>
+                                                    <input id="editDataDescription-{{ $d->description }}" type="hidden"
+                                                        name="description" value="{!! $d->description !!}" required>
+                                                    <trix-editor
+                                                        input="editDataDescription-{{ $d->description }}"></trix-editor>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary">Update</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <form action="{{ route('hapus data', ['id' => $d->id]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
@@ -58,8 +93,9 @@
                             <input type="text" class="form-control" id="dataTitle" name="title" required>
                         </div>
                         <div class="mb-3">
-                            <label for="dataDescription" class="form-label">Keterangan</label>
-                            <textarea class="form-control" id="dataDescription" name="description" rows="3" required></textarea>
+                            <label for="addDataDesaDescriptiob" class="form-label">Keterangan</label>
+                            <input id="addDataDesaDescriptiob" type="hidden" name="description" required>
+                            <trix-editor input="addDataDesaDescriptiob"></trix-editor>
                         </div>
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </form>
@@ -67,99 +103,4 @@
             </div>
         </div>
     </div>
-
-    <!-- Modal for Editing -->
-    <div class="modal fade" id="editDataModal" tabindex="-1" aria-labelledby="editDataModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editDataModalLabel">Edit Data</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="{{ route('update data') }}" method="POST">
-                        @csrf
-                        @method('PUT')
-                        <select name="id">
-                            @foreach ($datadesa as $d)
-                                <option value="{{ $d->id }}">{{ $d->title }}</option>
-                            @endforeach
-                        </select>
-                        <div class="mb-3">
-                            <label for="editDataDescription" class="form-label">Deskripsi</label>
-                            <input type="text" class="form-control" id="editDataDescription" name="title" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="editDataRemarks" class="form-label">Keterangan</label>
-                            <textarea class="form-control" id="editDataRemarks" name="description" rows="3" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Update</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{-- <!-- Modal for Editing Total Datadesa -->
-<div class="modal fade" id="editDataModal2" tabindex="-1" aria-labelledby="editDataModal2Label" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editDataModal2Label">Edit Total KK</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="edit_data.php?id=2" method="POST">
-                    <div class="mb-3">
-                        <label for="editTotalKK" class="form-label">Keterangan</label>
-                        <input type="text" class="form-control" id="editTotalKK" name="nilai" value="1,672" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Update</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal for Editing Dusun -->
-<div class="modal fade" id="editDataModal3" tabindex="-1" aria-labelledby="editDataModal3Label" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editDataModal3Label">Edit Dusun</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="edit_data.php?id=3" method="POST">
-                    <div class="mb-3">
-                        <label for="editDusun" class="form-label">Keterangan</label>
-                        <input type="text" class="form-control" id="editDusun" name="nilai" value="3" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Update</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal for Editing Jumlah RT -->
-<div class="modal fade" id="editDataModal4" tabindex="-1" aria-labelledby="editDataModal4Label" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editDataModal4Label">Edit Jumlah RT</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="edit_data.php?id=4" method="POST">
-                    <div class="mb-3">
-                        <label for="editRT" class="form-label">Keterangan</label>
-                        <input type="text" class="form-control" id="editRT" name="nilai" value="3" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Update</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div> --}}
 @endsection

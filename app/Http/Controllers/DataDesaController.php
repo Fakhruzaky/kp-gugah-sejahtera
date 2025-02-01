@@ -22,13 +22,18 @@ class DataDesaController extends Controller
         return back();
     }
 
-    public function update(Request $request)
+    public function update(Request $request, DataDesa $dataDesa)
     {
-        $datadesa = DataDesa::query()->findOrFail($request->id);
+        $data = $request->validate([
+            'title' => ['required', 'max:255'],
+            'description' => ['required', 'max:255'],  // Validate description length
+        ]);
 
-        $datadesa->update($request->except('id'));
+        // Update the record with the validated data, including the image field
+        $dataDesa->update($data);
 
-        return back();
+        // Redirect back with a success message
+        return back()->with('success', 'Data Program Berhasil Diubah!');
     }
 
     public function destroy(DataDesa $id)

@@ -151,7 +151,7 @@ Route::put("/program/{program}/update", [ProgramkerjaController::class, "updateP
 Route::delete('/hapus-program/{id}', [ProgramkerjaController::class, 'destroy'])->name('hapus program')->middleware('auth');
 
 Route::post('admin/savedata', [DataDesaController::class, 'store'])->name('savedata')->middleware('auth');
-Route::put('/data/edit', [DataDesaController::class, 'update'])->name('update data')->middleware('auth');
+Route::put('/data/{dataDesa}/update', [DataDesaController::class, 'update'])->name('update data')->middleware('auth');
 Route::delete('/hapus-data/{id}', [DataDesaController::class, 'destroy'])->name('hapus data')->middleware('auth');
 
 Route::middleware('guest')->group(function () {
