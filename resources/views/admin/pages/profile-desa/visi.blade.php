@@ -45,7 +45,7 @@
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>Deskripsi</th>
+                    <th>Visi</th>
                     <th>Keterangan</th>
                     <th>Aksi</th>
                 </tr>

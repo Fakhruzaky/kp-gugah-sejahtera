@@ -95,6 +95,8 @@ Route::middleware("auth")->group(function () {
 
 
             Route::get("/misi", [MisiController::class, "index"])->name("misi");
+            Route::post("/misi/store", [MisiController::class, "store"])->name("misi.store");
+            Route::put("/misi/{misi}/update", [MisiController::class, "update"])->name("misi.update");
             Route::delete("/misi/{misi}", [MisiController::class, "destroy"])->name("hapus misi");
 
             Route::get("/fasilitas", [FasilitasController::class, "index"])->name("fasilitas");
