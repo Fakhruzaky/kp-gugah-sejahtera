@@ -6,6 +6,8 @@
                 <div class="card col-3" style="width: 18rem;">
                     <img src="{{ $a->image_url ? asset('storage/' . $a->image_url) : asset('img/static-img/lutpi.jpg') }}"
                         class="card-img-top" alt="">
+
+
                     <div class="card-body">
                         <h5 class="card-title">{{ $a->title }}</h5>
                         <p class="card-text">{{ $a->created_at->translatedFormat('d F Y') }}</p>
