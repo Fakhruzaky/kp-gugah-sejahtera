@@ -41,7 +41,6 @@
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>Visi</th>
                     <th>Keterangan</th>
                     <th>Aksi</th>
                 </tr>
@@ -50,7 +49,6 @@
                 @foreach ($vision as $visi)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $visi->name }}</td>
                         <td>{!! $visi->description !!}</td>
                         <td class="column-gap-2 d-flex">
 
@@ -75,11 +73,6 @@
                                             @csrf
                                             @method('PUT')
                                             <div class="modal-body">
-                                                <div class="mb-3">
-                                                    <label for="name" class="form-label">Visi</label>
-                                                    <input type="text" class="form-control" id="name" name="name"
-                                                        value="{{ $visi->name }}" required>
-                                                </div>
                                                 <div class="mb-3">
                                                     <label for="editVisiDesc{{ $visi->id }}"
                                                         class="form-label">Keterangan</label>

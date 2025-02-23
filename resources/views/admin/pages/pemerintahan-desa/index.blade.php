@@ -67,7 +67,7 @@
                                     tidak ada gambar
                                 @endif
                             </td>
-                            <td>
+                            <td class="column-gap-2 d-flex">
                                 <!-- Button trigger modal -->
                                 <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal"
                                     data-bs-target="#strukturData-{{ $s->id }}">
@@ -96,15 +96,7 @@
                                                             name="name" value="{{ $s->name }}" required>
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="editStrukturDesc-{{ $s->id }}"
-                                                            class="form-label">Keterangan</label>
-                                                        <input id="editStrukturDesc-{{ $s->id }}" type="hidden"
-                                                            name="description" required value="{{ $s->description }}">
-                                                        <trix-editor input="editStrukturDesc-{{ $s->id }}">
-                                                        </trix-editor>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="oldImage" class="form-label">Gambar Lama</label>
+                                                        <label for="oldImage" class="form-label">Gambar</label>
                                                         @if ($s->image_url)
                                                             <div class="text-center">
                                                                 <img id="preview-{{ $s->id }}"
@@ -203,7 +195,7 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $pk->name }}</td>
                         <td>{!! $pk->description !!}</td>
-                        <td>
+                        <td class="column-gap-2 d-flex">
                             <div class="d-flex gap-2">
                                 <!-- Button trigger modal -->
                                 <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal"

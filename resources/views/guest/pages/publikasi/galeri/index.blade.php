@@ -9,7 +9,7 @@
                             alt="{{ $gallery->title }}" data-bs-toggle="modal"
                             data-bs-target="#{{ Str::slug($gallery->title) }}">
                         <div class="card-body">
-                            <h5 class="card-title">Foto {{ $gallery->title }}</h5>
+                            <h5 class="card-title">{{ $gallery->title }}</h5>
                         </div>
                     </div>
                 </div>

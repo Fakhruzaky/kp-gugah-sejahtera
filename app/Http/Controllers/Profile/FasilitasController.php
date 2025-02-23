@@ -20,7 +20,6 @@ class FasilitasController extends Controller
     {
         $data = $request->validate([
             'name' => ['required', 'max:255'],
-            'description' => ['required', 'max:255'],
             'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:10240'], // Image validation
         ]);
 
@@ -38,7 +37,6 @@ class FasilitasController extends Controller
     {
         $data = $request->validate([
             'name' => ['required', 'max:255'],
-            'description' => ['required', 'max:255'],  // Validate description length
             'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:10240'], // Image validation (nullable)
         ]);
 

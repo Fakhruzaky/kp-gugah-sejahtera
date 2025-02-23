@@ -39,7 +39,6 @@
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>Deskripsi</th>
                     <th>Keterangan</th>
                     <th>Aksi</th>
                 </tr>
@@ -48,7 +47,6 @@
                 @foreach ($mision as $misi)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $misi->name }}</td>
                         <td>{!! $misi->description !!}</td>
                         <td class="column-gap-2 d-flex">
                             <!-- Button trigger modal -->
@@ -72,11 +70,6 @@
                                             @csrf
                                             @method('PUT')
                                             <div class="modal-body">
-                                                <div class="mb-3">
-                                                    <label for="name" class="form-label">Misi</label>
-                                                    <input type="text" class="form-control" id="name" name="name"
-                                                        value="{{ $misi->name }}" required>
-                                                </div>
                                                 <div class="mb-3">
                                                     <label for="editMisiDesc{{ $misi->id }}"
                                                         class="form-label">Keterangan</label>

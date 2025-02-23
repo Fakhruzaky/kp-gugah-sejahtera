@@ -21,13 +21,8 @@
                     @csrf
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label for="name" class="form-label">Failitas</label>
+                            <label for="name" class="form-label">Fasilitas</label>
                             <input type="text" class="form-control" id="name" name="name" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="addDescriptionFasilitas" class="form-label">Keterangan</label>
-                            <input id="addDescriptionFasilitas" type="hidden" name="description" required>
-                            <trix-editor input="addDescriptionFasilitas"></trix-editor>
                         </div>
                         <div class="mb-3">
                             <label for="image" class="form-label">Gambar</label>
@@ -53,7 +48,6 @@
                 <tr>
                     <th>No</th>
                     <th>Nama Fasilitas</th>
-                    <th>Keterangan Fasilitas</th>
                     <th>Gambar Fasilitas</th>
                     <th>Aksi</th>
                 </tr>
@@ -63,7 +57,6 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $fasilitas->name }}</td>
-                        <td>{!! $fasilitas->description !!}</td>
                         <td>
                             @if ($fasilitas->image)
                                 <img src="{{ asset('storage/' . $fasilitas->image) }}" alt="Fasilitas Image" width="150">
@@ -100,15 +93,7 @@
                                                         value="{{ $fasilitas->name }}" required>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="editFasilitasDesc{{ $fasilitas->id }}"
-                                                        class="form-label">Keterangan</label>
-                                                    <input id="editFasilitasDesc{{ $fasilitas->id }}" type="hidden"
-                                                        name="description" required value="{{ $fasilitas->description }}">
-                                                    <trix-editor input="editFasilitasDesc{{ $fasilitas->id }}">
-                                                    </trix-editor>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="oldImage" class="form-label">Gambar Lama</label>
+                                                    <label for="oldImage" class="form-label">Gambar</label>
                                                     @if ($fasilitas->image)
                                                         <div class="text-center">
                                                             <img id="preview-{{ $fasilitas->id }}"
@@ -121,9 +106,8 @@
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="image" class="form-label">Gambar</label>
-                                                    <input type="file" class="form-control" id="image"
-                                                        name="image" accept="image/*"
-                                                        onchange="loadFile(event, {{ $fasilitas->id }})">
+                                                    <input type="file" class="form-control" id="image" name="image"
+                                                        accept="image/*" onchange="loadFile(event, {{ $fasilitas->id }})">
                                                     <img id="preview-{{ $fasilitas->id }}" class="img-fluid w-100 my-3">
                                                 </div>
                                             </div>
