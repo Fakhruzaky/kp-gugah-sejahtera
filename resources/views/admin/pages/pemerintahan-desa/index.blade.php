@@ -28,11 +28,6 @@
                                 <input type="text" class="form-control" id="name" name="name" required>
                             </div>
                             <div class="mb-3">
-                                <label for="addStructureDescription" class="form-label">Keterangan</label>
-                                <input id="addStructureDescription" type="hidden" name="description" required>
-                                <trix-editor input="addStructureDescription"></trix-editor>
-                            </div>
-                            <div class="mb-3">
                                 <label for="image" class="form-label">Gambar</label>
                                 <input type="file" class="form-control" id="image" name="image_url" accept="image/*"
                                     onchange="loadFile(event)">
@@ -54,7 +49,6 @@
                 <thead>
                     <tr>
                         <th>Nama</th>
-                        <th>Deskripsi</th>
                         <th>Gambar</th>
                         <th>Aksi</th>
                     </tr>
@@ -65,9 +59,6 @@
                         <tr>
                             <td>
                                 {{ $s->name }}
-                            </td>
-                            <td>
-                                {!! $s->description !!}
                             </td>
                             <td>
                                 @if ($s->image_url)

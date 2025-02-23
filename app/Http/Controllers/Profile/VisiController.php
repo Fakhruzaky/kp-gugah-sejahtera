@@ -18,7 +18,6 @@ class VisiController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => ['required', 'max:255'],
             'description' => ['required', 'max:255'],
         ]);
 
@@ -30,7 +29,6 @@ class VisiController extends Controller
     public function update(Request $request, Visi $visi)
     {
         $data = $request->validate([
-            'name' => ['required', 'max:255'],
             'description' => ['required', 'max:255'],
         ]);
 

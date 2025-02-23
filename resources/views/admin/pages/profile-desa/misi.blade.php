@@ -21,10 +21,6 @@
                     @csrf
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label for="name" class="form-label">Misi</label>
-                            <input type="text" class="form-control" id="name" name="name" required>
-                        </div>
-                        <div class="mb-3">
                             <label for="addDescriptionMisi" class="form-label">Keterangan</label>
                             <input id="addDescriptionMisi" type="hidden" name="description" required>
                             <trix-editor input="addDescriptionMisi"></trix-editor>

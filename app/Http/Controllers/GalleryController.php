@@ -19,8 +19,8 @@ class GalleryController extends Controller
     {
         $data = $request->validate([
             'title' => ['required', 'max:255'],
-            'description' => ['required', 'max:255'],
-            'image_url' => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'], // Image validation
+
+            'image_url' => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:10240'], // Image validation
         ]);
 
         // Handle image upload
@@ -38,8 +38,8 @@ class GalleryController extends Controller
 
         $data = $request->validate([
             'title' => ['required', 'max:255'],
-            'description' => ['required', 'max:255'],  // Validate description length
-            'image_url' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'], // Image validation (nullable)
+            // Validate description length
+            'image_url' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:10240'], // Image validation (nullable)
         ]);
 
         if ($request->hasFile('image_url')) {

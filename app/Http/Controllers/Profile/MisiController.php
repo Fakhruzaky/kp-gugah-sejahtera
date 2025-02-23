@@ -18,7 +18,6 @@ class MisiController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => ['required', 'max:255'],
             'description' => ['required', 'max:255'],
         ]);
 
@@ -30,7 +29,6 @@ class MisiController extends Controller
     public function update(Request $request, Misi $misi)
     {
         $data = $request->validate([
-            'name' => ['required', 'max:255'],
             'description' => ['required', 'max:255'],
         ]);
 

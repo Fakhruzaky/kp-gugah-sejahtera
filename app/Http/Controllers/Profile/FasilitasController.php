@@ -21,7 +21,7 @@ class FasilitasController extends Controller
         $data = $request->validate([
             'name' => ['required', 'max:255'],
             'description' => ['required', 'max:255'],
-            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'], // Image validation
+            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:10240'], // Image validation
         ]);
 
         // Handle image upload
@@ -39,7 +39,7 @@ class FasilitasController extends Controller
         $data = $request->validate([
             'name' => ['required', 'max:255'],
             'description' => ['required', 'max:255'],  // Validate description length
-            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'], // Image validation (nullable)
+            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:10240'], // Image validation (nullable)
         ]);
 
         if ($request->hasFile('image')) {

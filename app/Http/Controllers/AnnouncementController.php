@@ -30,7 +30,7 @@ class AnnouncementController extends Controller
         $data = $request->validate([
             'title' => ['required', 'max:255'],
             'description' => ['required', 'max:255'],
-            'image_url' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'], // Image validation
+            'image_url' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:10240'], // Image validation
         ]);
 
         // Handle image upload
@@ -51,7 +51,7 @@ class AnnouncementController extends Controller
         $data = $request->validate([
             'title' => ['required', 'max:255'],
             'description' => ['required', 'max:255'],  // Validate description length
-            'image_url' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'], // Image validation (nullable)
+            'image_url' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:10240'], // Image validation (nullable)
         ]);
 
         if ($request->hasFile('image_url')) {

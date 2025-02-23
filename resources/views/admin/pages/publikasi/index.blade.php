@@ -176,12 +176,6 @@
                                 placeholder="Caption" required>
                         </div>
                         <div class="mb-3">
-                            <label for="addGalleryDesc" class="form-label">Keterangan</label>
-                            <input id="addGalleryDesc" type="hidden" name="description" required>
-                            <trix-editor input="addGalleryDesc">
-                            </trix-editor>
-                        </div>
-                        <div class="mb-3">
                             <label for="image_url" class="form-label">Pilih Foto</label>
                             <input type="file" class="form-control" id="image_urlAdd" name="image_url" required
                                 onchange="loadFile(event)">
@@ -199,7 +193,6 @@
                 <tr>
                     <th>No</th>
                     <th>Judul Gambar</th>
-                    <th>Deskripsi</th>
                     <th>Gambar</th>
                     <th>Aksi</th>
                 </tr>
@@ -209,7 +202,6 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $gallery->title }}</td>
-                        <td>{!! $gallery->description !!}</td>
                         <td>
                             <img src="{{ asset('storage/' . $gallery->image_url) }}" alt="{{ $gallery->title }}"
                                 width="400" height="200">
