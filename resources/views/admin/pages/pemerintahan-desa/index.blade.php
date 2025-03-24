@@ -8,16 +8,16 @@
     <h2>Struktur Organisasi</h2>
     @if ($struktur->isEmpty())
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#StrukturModal">
             Tambah Struktur Desa
         </button>
 
         <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="StrukturModal" tabindex="-1" aria-labelledby="StrukturModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Struktur Organisasi</h1>
+                        <h1 class="modal-title fs-5" id="StrukturModalLabel">Tambah S   truktur Organisasi</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form action="{{ route('struktur.store') }}" method="POST" enctype="multipart/form-data">
@@ -145,16 +145,16 @@
     <!-- Program Kerja Section -->
     <h2 class="mt-5">Program Kerja</h2>
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ProkerModal">
         Tambah Program Kerja Desa
     </button>
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="ProkerModal" tabindex="-1" aria-labelledby="ProkerModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Program Kerja</h1>
+                    <h1 class="modal-title fs-5" id="ProkerModalLabel">Tambah Program Kerja</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form action="{{ route('program.store') }}" method="POST" enctype="multipart/form-data">
