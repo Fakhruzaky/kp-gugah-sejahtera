@@ -28,8 +28,8 @@ class AnnouncementController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'title' => ['required', 'max:255'],
-            'description' => ['required', 'max:255'],
+            'title' => ['required'],
+            'description' => ['required'],
             'image_url' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:10240'], // Image validation
         ]);
 
@@ -49,8 +49,8 @@ class AnnouncementController extends Controller
     {
 
         $data = $request->validate([
-            'title' => ['required', 'max:255'],
-            'description' => ['required', 'max:255'],  // Validate description length
+            'title' => ['required'],
+            'description' => ['required'],  // Validate description length
             'image_url' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:10240'], // Image validation (nullable)
         ]);
 
