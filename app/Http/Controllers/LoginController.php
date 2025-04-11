@@ -21,9 +21,7 @@ class LoginController extends Controller
             return redirect()->intended('admin/beranda');
         }
 
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ]);
+        return back();
     }
 
     public function logout(Request $request)
