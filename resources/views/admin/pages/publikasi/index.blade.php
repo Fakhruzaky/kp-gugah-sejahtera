@@ -192,7 +192,7 @@
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>Judul Gambar</th>
+                    <th>Keterangan</th>
                     <th>Gambar</th>
                     <th>Aksi</th>
                 </tr>
@@ -231,18 +231,14 @@
                                                 @method('PUT')
                                                 <div class="modal-body">
                                                     <div class="mb-3">
-                                                        <label for="name" class="form-label">Nama</label>
-                                                        <input type="text" class="form-control" id="name"
+                                                        <label for="title" class="form-label">Judul</label>
+                                                        <input type="text" class="form-control" id="title"
                                                             name="title" value="{{ $gallery->title }}" required>
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="editGalleryDesc-{{ $gallery->id }}"
-                                                            class="form-label">Keterangan</label>
-                                                        <input id="editGalleryDesc-{{ $gallery->id }}" type="hidden"
-                                                            name="description" required
-                                                            value="{{ $gallery->description }}">
-                                                        <trix-editor input="editGalleryDesc-{{ $gallery->id }}">
-                                                        </trix-editor>
+                                                        <label for="image_url" class="form-label">Pilih Foto</label>
+                                                        <input type="file" class="form-control" id="image_urlAdd"
+                                                            name="image_url" onchange="loadFile(event)">
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">

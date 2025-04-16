@@ -17,6 +17,10 @@ class SejarahController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'description' => 'required',
+        ]);
+
         Sejarah::create($request->all());
 
         return back();
@@ -24,6 +28,10 @@ class SejarahController extends Controller
 
     public function update(Request $request, Sejarah $sejarah)
     {
+        $request->validate([
+            'description' => 'required',
+        ]);
+
         $sejarah->update($request->all());
 
         return back();

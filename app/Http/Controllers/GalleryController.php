@@ -44,7 +44,7 @@ class GalleryController extends Controller
 
         if ($request->hasFile('image_url')) {
             if ($galeri->image_url) {
-                Storage::disk('public')->delete($galeri->image_url);
+                Storage::dis('public')->delete($galeri->image_url);
             }
 
             $data['image_url'] = $request->file('image_url')->store('galeri', 'public');

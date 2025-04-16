@@ -2,7 +2,7 @@
 @section('container')
     <div class="container my-5">
         <div class="row column-gap-3 row-gap-3 justify-content-center">
-            @foreach ($announcements as $a)
+            @foreach ($announcements as $a) 
                 <div class="card col-3" style="width: 18rem;">
                     <img src="{{ $a->image_url ? asset('storage/' . $a->image_url) : asset('') }}" class="card-img-top"
                         alt="">
