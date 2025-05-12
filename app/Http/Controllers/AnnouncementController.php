@@ -40,7 +40,10 @@ class AnnouncementController extends Controller
 
         $data['slug'] = Str::slug($data['title']);
 
-        Announcement::create($data);
+        Announcement::create([
+            ...$data,
+            "user_id" => auth()->user()->id
+        ]);
 
         return back()->with('success', 'Berhasil menambahkan pengumuman');
     }

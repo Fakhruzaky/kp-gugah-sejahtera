@@ -52,13 +52,13 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link text-light fw-bold fs-6 dropdown-toggle {{ request()->routeIs('guest.publikasi.*') ? 'active' : '' }}"
                         href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Publikasi
+                        Pengumuman & Galeri
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li><a class="dropdown-item {{ request()->routeIs('guest.publikasi.pengumuman') ? 'active' : '' }}"
                                 href="{{ route('guest.publikasi.pengumuman') }}">Pengumuman</a></li>
                         <li><a class="dropdown-item {{ request()->routeIs('guest.publikasi.galeri') ? 'active' : '' }}"
-                                href="{{ route('guest.publikasi.galeri') }}">Galeri</a></li>
+                                href="{{ route('guest.publikasi.galeri') }}">Galeri Kegiatan</a></li>
                     </ul>
                 </li>
 

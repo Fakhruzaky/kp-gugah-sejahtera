@@ -1,7 +1,7 @@
 @extends('admin.layouts.main')
 @section('container')
     <div class="d-flex justify-content-between flex-md-nowrap align-items-center border-bottom mb-3 flex-wrap pb-2 pt-3">
-        <h1 class="h2">Dashboard | Publikasi Desa</h1>
+        <h1 class="h2">Dashboard | Pengumuman & Galeri Desa</h1>
     </div>
 
     <h3>Pengumuman</h3>
@@ -154,7 +154,7 @@
     </div>
 
     <!-- Gallery Section -->
-    <h3>Galeri</h3>
+    <h3>Galeri Kegiatan</h3>
     <!-- Button to trigger add gallery modal -->
     <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addGalleryModal">Tambah
         Galeri</button>
