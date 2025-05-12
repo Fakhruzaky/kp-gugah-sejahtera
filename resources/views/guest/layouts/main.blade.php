@@ -21,8 +21,8 @@
         <div style="position: absolute; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5);"></div>
         <div class="container text-center absolute z-1">
             @if (Request::is('/'))
-            <h1 class="display-4 fw-normal">Selamat Datang di</h1>
-            <h1 class="display-3 fw-bold">Website Desa Gugah Sejahtera</h1>
+                <h1 class="display-4 fw-normal">Selamat Datang di</h1>
+                <h1 class="display-3 fw-bold">Website Desa Gugah Sejahtera</h1>
             @endif
 
             @if (Request::is('profile/sejarah'))
@@ -54,7 +54,7 @@
             @endif
 
             @if (Request::is('publikasi/galeri'))
-                <h1 class="fs-1 fw-bold">Galeri Foto</h1>
+                <h1 class="fs-1 fw-bold">Galeri Kegiatan Desa</h1>
             @endif
         </div>
     </div>
