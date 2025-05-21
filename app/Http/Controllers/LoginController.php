@@ -21,7 +21,7 @@ class LoginController extends Controller
             return redirect()->intended('admin/beranda');
         }
 
-        return back();
+        return back()->with("error", "username atau password salah");
     }
 
     public function logout(Request $request)

@@ -62,6 +62,11 @@
     <div class="minvh">
         <div class="container my-5">
             <h2 class="text-center mb-4">Login</h2>
+            @session('error')
+                <div class="alert alert-danger text-center" role="alert">
+                    {{ session('error') }}
+                </div>
+            @endsession
             <div class="row justify-content-center">
                 <div class="col-lg-4">
                     <div class="card p-4">
