@@ -243,7 +243,8 @@
                                 <form action="{{ route('hapus program', ['id' => $pk->id]) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                    <button type="submit" onclick="return confirm('apakah anda ingin menghapus?');"
+                                        class="btn btn-danger btn-sm">Hapus</button>
                                 </form>
                             </div>
                         </td>
